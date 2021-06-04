@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:update, :edit]
 
   def show
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-     @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
@@ -25,6 +26,18 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def following
+    user = User.find(params[:id])
+    @users = user.following
+    render 'follows'
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+    render 'follows'
   end
 
   private
@@ -38,4 +51,5 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
 end

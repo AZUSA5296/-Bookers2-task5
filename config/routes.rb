@@ -5,6 +5,16 @@ Rails.application.routes.draw do
     registrations: 'devise/registrations'
   }
 
+  get 'relationships/following'
+  get 'relationships/follower'
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
+
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
 
@@ -15,5 +25,7 @@ Rails.application.routes.draw do
   	resource :favorites, only: [:create, :destroy]
   	resources :book_comments, only: [:create, :destroy]
   end
+
+  resources :relationships, only: [:create, :destroy]
 
 end
