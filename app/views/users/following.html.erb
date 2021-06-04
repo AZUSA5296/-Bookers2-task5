@@ -1,6 +1,6 @@
-<h2>Follower Users</h2>
+<h2>Follow Users</h2>
 <% if @users.present? %>
-  <% @user.followers.each do |user| %>
+  <% @user.following.each do |user| %>
   <table class='table'>
     <tr>
       <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
