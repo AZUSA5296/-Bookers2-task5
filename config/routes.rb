@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: 'devise/registrations'
   }
 
-  get 'relationships/following'
+  get '/search' => 'search#search' #検索機能
+
+  get 'relationships/following' #フォロー機能
   get 'relationships/follower'
 
   resources :users do
@@ -22,8 +24,8 @@ Rails.application.routes.draw do
   resources :books
 
   resources :books do
-  	resource :favorites, only: [:create, :destroy]
-  	resources :book_comments, only: [:create, :destroy]
+  	resource :favorites, only: [:create, :destroy] #いいね機能
+  	resources :book_comments, only: [:create, :destroy] #コメント機能
   end
 
   resources :relationships, only: [:create, :destroy]
